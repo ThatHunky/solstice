@@ -186,7 +186,7 @@ public final class Solstice extends JavaPlugin {
                     + McVersion.NEWEST_VERIFIED + "). If the server fails to load registries after a restart, delete world/datapacks/"
                     + s.datapackFolder() + " or set sky.enabled: false.");
         }
-        Path folder = main.getWorldFolder().toPath().resolve("datapacks").resolve(s.datapackFolder());
+        Path folder = SkyPack.levelRoot(main.getWorldFolder().toPath()).resolve("datapacks").resolve(s.datapackFolder());
         int format = features.version.dataPackFormat();
         try {
             SkyPack.Result result = SkyPack.install(folder, SkyPack.files(s.namespace(), s.transitionDays(), s.skyColors(),

@@ -378,6 +378,10 @@ public final class TestMain {
     }
 
     private static void skyPack() throws IOException {
+        check(SkyPack.levelRoot(Path.of("/srv/world/dimensions/minecraft/overworld")).equals(Path.of("/srv/world")),
+                "sky: 26.x dimension folder resolves to the save root");
+        check(SkyPack.levelRoot(Path.of("/srv/world")).equals(Path.of("/srv/world")),
+                "sky: 1.21 world folder is already the save root");
         Map<String, String> files = SkyPack.files("matsuri", 7, Settings.DEFAULT_SKY, 107);
         String live = Files.readString(resource("matsuri-year.json"), StandardCharsets.UTF_8);
         check(files.get("data/matsuri/timeline/year.json").equals(live), "sky: timeline matches Matsuri's hand-made year.json byte for byte");

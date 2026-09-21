@@ -162,4 +162,19 @@ final class SkyPack {
         }
         return (int) (0xFF000000L | Long.parseLong(h, 16));
     }
+
+    /**
+     * The save's root folder, where datapacks/ lives. From 26.1 on, a world's folder is its dimension
+     * folder, world/dimensions/<namespace>/<name>, while datapacks stay at world/datapacks.
+     */
+    static Path levelRoot(Path worldFolder) {
+        Path p = worldFolder.toAbsolutePath().normalize();
+        Path parent = p.getParent();
+        Path grand = parent == null ? null : parent.getParent();
+        if (grand != null && grand.getFileName() != null && grand.getFileName().toString().equals("dimensions")
+                && grand.getParent() != null) {
+            return grand.getParent();
+        }
+        return p;
+    }
 }
