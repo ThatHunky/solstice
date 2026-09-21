@@ -190,7 +190,7 @@ for `particles.bedrock: false`.
 ./gradlew build
 ```
 
-Produces `build/libs/Solstice-1.0.0.jar` (bStats bundled and relocated). `build` runs `TestMain`'s
+Produces `build/libs/Solstice-1.0.0.jar`. `build` runs `TestMain`'s
 server-free checks, compiles against every supported paper-api line and runs `compatLinkage`; any
 failure fails the build. Needs a JDK 25 toolchain and network access to `repo.papermc.io` and Maven
 Central.
@@ -203,15 +203,7 @@ Central.
 
 Compiles with plain `javac --release 21` against a Paper install's `libraries/` folder (`SERVER`,
 defaulting to the maintainer's server, which runs 26.2), runs `TestMain`, and only writes
-`Solstice-1.0.0.jar` if every check passes. It doesn't include bStats.
-
-## bStats
-
-The Gradle build shades [bStats](https://bstats.org) (`org.bstats` → `dev.thathunky.solstice.libs.bstats`)
-with standard metrics only. The plugin id in
-`src/bstats/java/dev/thathunky/solstice/stats/PluginMetrics.java` is a placeholder (`0`), which skips
-metrics; register the plugin at bstats.org and put the real id there before a release. Server owners can
-turn metrics off for all plugins in `plugins/bStats/config.yml`.
+`Solstice-1.0.0.jar` if every check passes.
 
 ## License
 

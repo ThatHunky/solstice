@@ -1,8 +1,5 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
 plugins {
     `java-library`
-    id("com.gradleup.shadow") version "9.1.0"
 }
 
 group = "dev.thathunky"
@@ -35,8 +32,6 @@ val compatApis = mapOf(
 
 dependencies {
     compileOnly(floorApi)
-    // Shaded and relocated into the final jar; see PluginMetrics and the README for how to disable it.
-    implementation("org.bstats:bstats-bukkit:3.2.1")
     // TestMain needs paper-api (YamlConfiguration, NamespacedKey) at runtime too.
     testImplementation(floorApi)
 }
@@ -46,10 +41,6 @@ sourceSets {
         resources {
             srcDir(rootDir)
             include("plugin.yml", "config.yml", "lang/**")
-        }
-        // bStats lives outside src/main/java so build.sh's plain javac neither needs nor bundles it.
-        java {
-            srcDir("src/bstats/java")
         }
     }
 }
@@ -132,17 +123,4 @@ tasks.named<Test>("test") {
 
 tasks.named("check") {
     dependsOn(runTests, compatCompile, compatLinkage)
-}
-
-tasks.named<ShadowJar>("shadowJar") {
-    archiveClassifier.set("")
-    relocate("org.bstats", "dev.thathunky.solstice.libs.bstats")
-}
-
-tasks.named("build") {
-    dependsOn(tasks.named("shadowJar"))
-}
-
-tasks.jar {
-    archiveClassifier.set("plain")
 }

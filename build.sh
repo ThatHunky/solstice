@@ -3,7 +3,7 @@
 # bytecode. The jar is only written if TestMain passed.
 #
 # This is the maintainer's local fast path: it needs a Paper install's libraries/ folder (SERVER,
-# defaulting to the maintainer's own server) and does not bundle bStats. ./gradlew build is the
+# defaulting to the maintainer's own server). ./gradlew build is the
 # portable build and also compiles against every supported paper-api line.
 set -eu
 HERE="$(cd "$(dirname "$0")" && pwd)"

@@ -43,7 +43,6 @@ public final class Solstice extends JavaPlugin {
             c.setExecutor(commands);
             c.setTabCompleter(commands);
         }
-        initMetrics();
     }
 
     @Override
@@ -242,21 +241,6 @@ public final class Solstice extends JavaPlugin {
             y.save(stateFile());
         } catch (IOException e) {
             getLogger().warning("could not save state.yml: " + e);
-        }
-    }
-
-    /**
-     * Starts bStats if {@code dev.thathunky.solstice.stats.PluginMetrics} is on the classpath — only
-     * the Gradle build includes it; build.sh's jar does not.
-     */
-    private void initMetrics() {
-        try {
-            Class.forName("dev.thathunky.solstice.stats.PluginMetrics")
-                    .getConstructor(JavaPlugin.class).newInstance(this);
-        } catch (ClassNotFoundException e) {
-            // Not in this build — metrics simply don't start.
-        } catch (ReflectiveOperationException | LinkageError e) {
-            getLogger().warning("bStats metrics failed to start: " + e);
         }
     }
 }

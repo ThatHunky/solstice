@@ -20,7 +20,7 @@ jobs:
           java-version: |
             25
             21
-      - run: ./gradlew shadowJar --stacktrace -Porg.gradle.java.installations.fromEnv=JAVA_HOME_25_X64
+      - run: ./gradlew jar --stacktrace -Porg.gradle.java.installations.fromEnv=JAVA_HOME_25_X64
       - uses: actions/upload-artifact@v4
         with:
           name: solstice-jar
