@@ -1,0 +1,78 @@
+# Solstice — 简体中文。
+
+# Java date pattern for "until <date>".
+date-format: "M月d日"
+
+seasons:
+  winter:
+    name: "❄ 冬"
+  spring:
+    name: "🌸 春"
+  summer:
+    name: "☀ 夏"
+  autumn:
+    name: "🍁 秋"
+
+until:
+  date: "到{date}"
+  days: "还剩{days}个游戏日"
+
+# /season
+season:
+  header: "季节：{season}"
+  until: " — {until}"
+  preview: "（预览）"
+  bullet: "• {effect}"
+
+# What each season changes, in /season. A line is only shown when its feature is on.
+effects:
+  winter:
+    biomes: "雪地生物群系：下雪代替下雨，河流和池塘结冰（农田旁不结冰）"
+    crops: "露天作物生长速度减半，温室里照常"
+    animals: "动物繁殖变少；白天短，夜晚长"
+    melt-date: "{date}天然的雪和冰会融化，你放置的会保留"
+    melt: "春天到来时天然的雪和冰会融化，你放置的会保留"
+  spring:
+    crops: "作物生长快四分之一"
+    animals: "幼年动物长大快一倍"
+    particles: "樱花树下飘落花瓣"
+  summer:
+    crops: "作物生长快四分之一"
+    weather: "晴天长，雨短，雷雨多"
+    particles: "夜里草丛和花上有萤火虫"
+  autumn:
+    fish: "鱼上钩快四分之一"
+    weather: "雨水绵长；树下落满红叶"
+
+# The title and chat line once per season.
+announce:
+  winter:
+    subtitle: "夜晚漫长。待在有光的地方。"
+    chat: "冬 — {until}。"
+  spring:
+    subtitle: "昼夜等长。万物开花。"
+    chat: "春 — {until}。"
+  summer:
+    subtitle: "白天长，夜晚短。"
+    chat: "夏 — {until}。"
+  autumn:
+    subtitle: "昼夜等长。树叶飘落。"
+    chat: "秋 — {until}。"
+  hint: "季节带来的变化：/season"
+
+# /solstice (admins)
+admin:
+  no-permission: "你没有权限。"
+  usage: "/solstice status | preview <季节|off> | set <季节> | probe <x> <y> <z> <季节> [night] | chunk <x> <z> | reload"
+  status: "日历季节：{season}{preview}，刻：{ticks}"
+  status-preview: "，预览：{season}"
+  status-details: "Solstice {version}，模式 {mode}，Minecraft {minecraft}。功能：{features}"
+  preview-set: "预览：{season}"
+  preview-off: "预览：关闭"
+  set: "季节已设为：{season}"
+  set-real-date: "set 只能在 game-days 模式下使用。要测试季节，请用 /solstice preview <季节>"
+  probe: "x z → {rounds}次中的粒子：{hits}"
+  feature-off: "{feature}：配置中已关闭，或此版本不支持"
+  chunk-unloaded: "区块未加载"
+  chunk: "winter={winter}, palette={palette}, formed={formed}, 生物群系={biome}"
+  reload: "Solstice：配置已重新加载"

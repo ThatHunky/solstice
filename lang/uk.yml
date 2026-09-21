@@ -1,0 +1,78 @@
+# Solstice — українська. Тексти слово в слово з сервера Matsuri, де плагін з'явився.
+
+# Java date pattern for "until <date>".
+date-format: "d MMMM"
+
+seasons:
+  winter:
+    name: "❄ Сніг"
+  spring:
+    name: "🌸 Сакура"
+  summer:
+    name: "☀ Спека"
+  autumn:
+    name: "🍁 Багрянець"
+
+until:
+  date: "до {date}"
+  days: "ігрових діб лишилось: {days}"
+
+# /season
+season:
+  header: "Пора: {season}"
+  until: " — {until}"
+  preview: " (preview)"
+  bullet: "• {effect}"
+
+# What each season changes, in /season. A line is only shown when its feature is on.
+effects:
+  winter:
+    biomes: "Біоми сніжні: сніг замість дощу, ріки й ставки замерзають (біля ріллі — ні)"
+    crops: "Урожай під відкритим небом росте вдвічі повільніше — у теплиці як завжди"
+    animals: "Тварини плодяться рідше; дні короткі, ночі довгі"
+    melt-date: "{date} природний сніг і лід розтануть, поставлене вами лишиться"
+    melt: "Навесні природний сніг і лід розтануть, поставлене вами лишиться"
+  spring:
+    crops: "Урожай росте на чверть швидше"
+    animals: "Малеча тварин дорослішає вдвічі швидше"
+    particles: "Під вишнями падають пелюстки"
+  summer:
+    crops: "Урожай росте на чверть швидше"
+    weather: "Довгі ясні дні, короткі дощі, часті грози"
+    particles: "Уночі над травою й квітами — світлячки"
+  autumn:
+    fish: "Риба клює на чверть швидше"
+    weather: "Довгі дощі; під кронами падає руде листя"
+
+# The title and chat line once per season.
+announce:
+  winter:
+    subtitle: "Ночі довгі. Тримайтеся світла."
+    chat: "Зима — {until}."
+  spring:
+    subtitle: "День і ніч рівні. Цвіте все."
+    chat: "Весна — {until}."
+  summer:
+    subtitle: "Дні довгі, ночі короткі."
+    chat: "Літо — {until}."
+  autumn:
+    subtitle: "День і ніч рівні. Листя падає."
+    chat: "Осінь — {until}."
+  hint: "Що пора міняє в грі — /season"
+
+# /solstice (admins)
+admin:
+  no-permission: "Немає дозволу."
+  usage: "/solstice status | preview <пора|off> | set <пора> | probe <x> <y> <z> <пора> [night] | chunk <x> <z> | reload"
+  status: "Пора за календарем: {season}{preview}, тіки: {ticks}"
+  status-preview: ", preview: {season}"
+  status-details: "Solstice {version}, режим {mode}, Minecraft {minecraft}. Функції: {features}"
+  preview-set: "preview: {season}"
+  preview-off: "preview: вимкнено"
+  set: "Пору встановлено: {season}"
+  set-real-date: "set працює лише в режимі game-days. Щоб перевірити пору — /solstice preview <пора>"
+  probe: "x z → частинок за {rounds} обходів: {hits}"
+  feature-off: "{feature}: вимкнено в конфігу або недоступно на цій версії"
+  chunk-unloaded: "чанк не завантажено"
+  chunk: "winter={winter}, palette={palette}, formed={formed}, біом={biome}"
+  reload: "Solstice: конфіг перечитано"

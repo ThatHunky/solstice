@@ -1,0 +1,78 @@
+# Solstice — português (Brasil).
+
+# Java date pattern for "until <date>".
+date-format: "d 'de' MMMM"
+
+seasons:
+  winter:
+    name: "❄ Inverno"
+  spring:
+    name: "🌸 Primavera"
+  summer:
+    name: "☀ Verão"
+  autumn:
+    name: "🍁 Outono"
+
+until:
+  date: "até {date}"
+  days: "dias de jogo restantes: {days}"
+
+# /season
+season:
+  header: "Estação: {season}"
+  until: " — {until}"
+  preview: " (prévia)"
+  bullet: "• {effect}"
+
+# What each season changes, in /season. A line is only shown when its feature is on.
+effects:
+  winter:
+    biomes: "Biomas nevados: neve em vez de chuva, rios e lagos congelam (menos perto de plantações)"
+    crops: "Plantações a céu aberto crescem na metade da velocidade; na estufa, como sempre"
+    animals: "Os animais se reproduzem menos; dias curtos, noites longas"
+    melt-date: "Em {date}, a neve e o gelo naturais derretem; o que você colocou fica"
+    melt: "Na primavera, a neve e o gelo naturais derretem; o que você colocou fica"
+  spring:
+    crops: "As plantações crescem um quarto mais rápido"
+    animals: "Os filhotes crescem duas vezes mais rápido"
+    particles: "Pétalas caem sob as cerejeiras"
+  summer:
+    crops: "As plantações crescem um quarto mais rápido"
+    weather: "Dias longos e limpos, chuvas curtas, tempestades frequentes"
+    particles: "À noite, vaga-lumes sobre a grama e as flores"
+  autumn:
+    fish: "Os peixes mordem um quarto mais rápido"
+    weather: "Chuvas longas; folhas vermelhas caem sob as árvores"
+
+# The title and chat line once per season.
+announce:
+  winter:
+    subtitle: "Noites longas. Fique perto da luz."
+    chat: "Inverno — {until}."
+  spring:
+    subtitle: "Dia e noite têm a mesma duração. Tudo floresce."
+    chat: "Primavera — {until}."
+  summer:
+    subtitle: "Dias longos, noites curtas."
+    chat: "Verão — {until}."
+  autumn:
+    subtitle: "Dia e noite têm a mesma duração. As folhas caem."
+    chat: "Outono — {until}."
+  hint: "O que a estação muda: /season"
+
+# /solstice (admins)
+admin:
+  no-permission: "Você não tem permissão."
+  usage: "/solstice status | preview <estação|off> | set <estação> | probe <x> <y> <z> <estação> [night] | chunk <x> <z> | reload"
+  status: "Estação pelo calendário: {season}{preview}, ticks: {ticks}"
+  status-preview: ", prévia: {season}"
+  status-details: "Solstice {version}, modo {mode}, Minecraft {minecraft}. Recursos: {features}"
+  preview-set: "prévia: {season}"
+  preview-off: "prévia: desligada"
+  set: "Estação definida: {season}"
+  set-real-date: "set só funciona no modo game-days. Para testar uma estação, use /solstice preview <estação>"
+  probe: "x z → partículas em {rounds} passagens: {hits}"
+  feature-off: "{feature}: desligado na configuração ou indisponível nesta versão"
+  chunk-unloaded: "chunk não carregado"
+  chunk: "winter={winter}, palette={palette}, formed={formed}, bioma={biome}"
+  reload: "Solstice: configuração recarregada"

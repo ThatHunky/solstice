@@ -1,0 +1,78 @@
+# Solstice — polski.
+
+# Java date pattern for "until <date>".
+date-format: "d MMMM"
+
+seasons:
+  winter:
+    name: "❄ Zima"
+  spring:
+    name: "🌸 Wiosna"
+  summer:
+    name: "☀ Lato"
+  autumn:
+    name: "🍁 Jesień"
+
+until:
+  date: "do {date}"
+  days: "pozostało dni gry: {days}"
+
+# /season
+season:
+  header: "Pora roku: {season}"
+  until: " — {until}"
+  preview: " (podgląd)"
+  bullet: "• {effect}"
+
+# What each season changes, in /season. A line is only shown when its feature is on.
+effects:
+  winter:
+    biomes: "Śnieżne biomy: śnieg zamiast deszczu, rzeki i stawy zamarzają (ale nie przy polach)"
+    crops: "Uprawy pod gołym niebem rosną dwa razy wolniej, w szklarni jak zwykle"
+    animals: "Zwierzęta rzadziej się rozmnażają; krótkie dni, długie noce"
+    melt-date: "{date} stopnieje naturalny śnieg i lód; to, co postawisz, zostanie"
+    melt: "Wiosną stopnieje naturalny śnieg i lód; to, co postawisz, zostanie"
+  spring:
+    crops: "Uprawy rosną o jedną czwartą szybciej"
+    animals: "Młode zwierzęta dorastają dwa razy szybciej"
+    particles: "Pod wiśniami spadają płatki"
+  summer:
+    crops: "Uprawy rosną o jedną czwartą szybciej"
+    weather: "Długie pogodne dni, krótkie deszcze, częste burze"
+    particles: "Nocą nad trawą i kwiatami latają świetliki"
+  autumn:
+    fish: "Ryby biorą o jedną czwartą szybciej"
+    weather: "Długie deszcze; pod drzewami spadają rude liście"
+
+# The title and chat line once per season.
+announce:
+  winter:
+    subtitle: "Długie noce. Trzymaj się światła."
+    chat: "Zima — {until}."
+  spring:
+    subtitle: "Dzień i noc są równe. Wszystko kwitnie."
+    chat: "Wiosna — {until}."
+  summer:
+    subtitle: "Długie dni, krótkie noce."
+    chat: "Lato — {until}."
+  autumn:
+    subtitle: "Dzień i noc są równe. Liście spadają."
+    chat: "Jesień — {until}."
+  hint: "Co zmienia pora roku: /season"
+
+# /solstice (admins)
+admin:
+  no-permission: "Brak uprawnień."
+  usage: "/solstice status | preview <pora|off> | set <pora> | probe <x> <y> <z> <pora> [night] | chunk <x> <z> | reload"
+  status: "Pora roku według kalendarza: {season}{preview}, ticki: {ticks}"
+  status-preview: ", podgląd: {season}"
+  status-details: "Solstice {version}, tryb {mode}, Minecraft {minecraft}. Funkcje: {features}"
+  preview-set: "podgląd: {season}"
+  preview-off: "podgląd: wyłączony"
+  set: "Ustawiono porę roku: {season}"
+  set-real-date: "set działa tylko w trybie game-days. Aby sprawdzić porę roku, użyj /solstice preview <pora>"
+  probe: "x z → cząsteczki w {rounds} przebiegach: {hits}"
+  feature-off: "{feature}: wyłączone w konfiguracji albo niedostępne w tej wersji"
+  chunk-unloaded: "chunk nie jest załadowany"
+  chunk: "winter={winter}, palette={palette}, formed={formed}, biom={biome}"
+  reload: "Solstice: konfiguracja wczytana ponownie"

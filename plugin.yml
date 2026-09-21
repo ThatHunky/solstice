@@ -1,0 +1,28 @@
+name: Solstice
+version: '1.0.0'
+main: dev.thathunky.solstice.Solstice
+api-version: '1.21'
+author: ThatHunky
+website: https://github.com/ThatHunky/solstice
+description: Seasons for Paper — sky colours, day length, weather, particles, crops, animals, fishing and a real winter
+softdepend: [floodgate, Geyser-Spigot]
+commands:
+  season:
+    description: What season it is and what it changes
+    usage: /season
+    aliases: [pora]
+    permission: solstice.season
+  solstice:
+    description: Seasons admin commands
+    usage: /solstice status|preview <season|off>|set <season>|probe <x> <y> <z> <season> [night]|chunk <x> <z>|reload
+    aliases: [seasons]
+permissions:
+  solstice.season:
+    description: The /season command
+    default: true
+  solstice.admin:
+    description: The /solstice commands
+    default: op
+  matsuri.seasons.admin:
+    description: "Legacy node kept for compatibility — same as solstice.admin"
+    default: op

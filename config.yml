@@ -1,0 +1,155 @@
+# Solstice — seasons for Paper. Every option is explained where it stands.
+# Most changes apply with /solstice reload. Changes to the "sky" section need a server restart
+# (the season clock and colour timeline are datapack registries, which only load at startup).
+
+# Language for the console, and for players whose client language has no file.
+# Bundled: en, uk, de, es, fr, pl, pt_BR, ja, zh_CN. A file you put in plugins/Solstice/lang/
+# overrides the bundled one key by key, or adds a new language.
+language: en
+# true — every player gets the texts in their own client language when there is a file for it.
+per-player-language: true
+
+# Worlds where seasons act: weather, particles, crops, animals, fishing and winter.
+# Overworld-type worlds only. The server's main world is always the one whose day length and
+# sky colours change (there is one overworld clock).
+worlds:
+  - world
+
+calendar:
+  # real-date — seasons follow the real calendar, whole months (winter = December to February
+  #             in the north). The plugin shipped with this mode.
+  # game-days — each season lasts days-per-season in-game days. Progress is saved in state.yml
+  #             and survives restarts; /time set does not move it.
+  mode: real-date
+  # real-date: the time zone that decides when a day starts, e.g. Europe/Kyiv. Empty — the
+  # server machine's own zone.
+  timezone: ""
+  # real-date: north or south. South shifts the seasons by half a year (June to August is winter).
+  hemisphere: north
+  # game-days: how many full in-game days one season lasts.
+  days-per-season: 8
+  # game-days: the season a fresh install starts in.
+  start-season: spring
+
+# Colour of each season in titles, /season and TAB.
+colors:
+  winter: "#9fc3e6"
+  spring: "#f2a7c3"
+  summer: "#f5b942"
+  autumn: "#d0562b"
+
+# A title, a chat line and a sound, once per player per season.
+announce:
+  enabled: true
+  # Worlds (by key) where the title is shown. A player in any other world, e.g. a login lobby,
+  # gets it later, once they reach one of these.
+  worlds:
+    - minecraft:overworld
+    - minecraft:the_nether
+    - minecraft:the_end
+  sound: block.amethyst_block.chime
+  subtitle-color: "#8a83c2"
+
+# How fast the day clock runs, by day and by night (1.0 = vanilla). Winter: long nights,
+# summer: long days. Needs Minecraft 26.1 or newer (world clocks); off on older versions.
+day-length:
+  enabled: true
+  winter: {day: 0.972, night: 0.321}
+  spring: {day: 0.583, night: 0.417}
+  summer: {day: 0.449, night: 0.694}
+  autumn: {day: 0.583, night: 0.417}
+
+# Sky, fog, cloud, sunrise and sky-light tint per season. Needs Minecraft 26.1 or newer.
+# The plugin writes a small datapack into <main world>/datapacks/<datapack-folder> and keeps it
+# up to date; after it is first written or changed, restart the server once.
+sky:
+  enabled: true
+  # The folder the plugin owns inside the datapacks folder. It rewrites the files in it.
+  datapack-folder: solstice
+  # Names of the clock and timeline: <namespace>:season and <namespace>:year.
+  namespace: solstice
+  # Colours blend over this many days on each side of a season change.
+  transition-days: 7
+  # Each line: winter, spring, summer, autumn. The tint multiplies vanilla colours, so #ffffff
+  # changes nothing. Names without a colon mean minecraft:visual/<name>.
+  colors:
+    sky_color: ["#d6e0ef", "#fbe6f0", "#fff5dc", "#f6dcc8"]
+    fog_color: ["#e6ecf5", "#fff0f5", "#fff3d6", "#f3d9c4"]
+    cloud_color: ["#dde3ea", "#fff4f8", "#ffffff", "#f5e6da"]
+    sunrise_sunset_color: ["#e8d8e8", "#ffc4dc", "#ffb870", "#e8704a"]
+    sky_light_color: ["#e4ecff", "#fff2f6", "#fff6e0", "#ffe8d4"]
+
+# Falling cherry petals in spring, snowflakes from spruces in winter, autumn leaves under any
+# natural tree, fireflies over grass and flowers on summer nights. Only under open sky, never in
+# caves or under roofs, and each player sees only their own. Autumn leaves and fireflies need
+# Minecraft 1.21.5 or newer.
+particles:
+  enabled: true
+  interval-ticks: 10
+  # Random blocks probed around each player per interval, and how far away.
+  per-player: 24
+  radius: 12
+  # false — don't send particles to Bedrock players (Geyser/Floodgate), if they look wrong there.
+  bedrock: true
+
+# Weather by season. The vanilla weather cycle is turned off in the listed worlds while the plugin
+# runs, and turned back on when it stops. Minutes are random within each range.
+weather:
+  enabled: true
+  winter: {clear-minutes: [10, 20], rain-minutes: [10, 30], thunder-chance: 0.0}
+  spring: {clear-minutes: [8, 20], rain-minutes: [3, 8], thunder-chance: 0.10}
+  summer: {clear-minutes: [20, 45], rain-minutes: [3, 6], thunder-chance: 0.45}
+  autumn: {clear-minutes: [8, 15], rain-minutes: [10, 25], thunder-chance: 0.10}
+
+# Crops on farmland. Bone meal is not affected.
+crops:
+  enabled: true
+  # Chance that a growth step adds one extra stage.
+  bonus-chance: {winter: 0.0, spring: 0.25, summer: 0.25, autumn: 0.0}
+  # Chance that a growth step is cancelled when the crop is under open sky. Under glass or any
+  # roof (a greenhouse) crops grow as usual.
+  open-sky-cancel-chance: {winter: 0.60, spring: 0.0, summer: 0.0, autumn: 0.0}
+
+animals:
+  enabled: true
+  # Chance that breeding gives no baby (the parents can be fed again right away).
+  breed-cancel-chance: {winter: 0.40, spring: 0.0, summer: 0.0, autumn: 0.0}
+  # How many times faster babies born in that season grow up (1 = vanilla).
+  baby-growth: {winter: 1.0, spring: 2.0, summer: 1.0, autumn: 1.0}
+
+fishing:
+  enabled: true
+  # Multiplier on the wait for a bite (0.75 = a quarter faster).
+  wait-factor: {winter: 1.0, spring: 1.0, summer: 1.0, autumn: 0.75}
+
+# A real winter: loaded chunks switch to snowy biomes (it snows instead of rain, rivers and
+# ponds freeze, grass and leaves turn wintry). The real biomes and all snow and ice that formed are
+# recorded in each chunk; in spring the biomes return and the recorded snow and ice melt. Snow and
+# ice placed by players is never recorded, so it stays. Water next to farmland does not freeze.
+# Chunks are only changed when they load anyway — the world is never scanned.
+winter:
+  enabled: true
+  # Already loaded chunks handled per tick when the season changes.
+  chunks-per-tick: 10
+  # Most snow/ice positions recorded per chunk; past that, no more forms there.
+  formed-limit: 8192
+  # More biome pairs, e.g. for datapack biomes: "terralith:lush_valley": "minecraft:snowy_plains".
+  # An empty value keeps a built-in biome unchanged in winter.
+  extra-biomes: {}
+
+# Optional: publish the current season to other software. Paths are relative to the server folder.
+integrations:
+  # Writes an animation (by default "season") into TAB's animations file and runs "tab reload".
+  # Use it in TAB as %animation:season%. Only the block between "# >>> season" and "# <<< season"
+  # is touched.
+  tab:
+    enabled: false
+    file: plugins/TAB/animations.yml
+    animation: season
+    # Language of the season name in TAB. Empty — the "language" option above.
+    language: ""
+  # Writes {"id": 3, "key": "autumn", "from": "2026-09-01", "to": "2026-11-30"} when the season
+  # changes, e.g. for a website. In game-days mode "from" and "to" are null.
+  json-file:
+    enabled: false
+    path: plugins/Solstice/season.json

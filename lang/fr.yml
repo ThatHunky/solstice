@@ -1,0 +1,78 @@
+# Solstice — français.
+
+# Java date pattern for "until <date>".
+date-format: "d MMMM"
+
+seasons:
+  winter:
+    name: "❄ Hiver"
+  spring:
+    name: "🌸 Printemps"
+  summer:
+    name: "☀ Été"
+  autumn:
+    name: "🍁 Automne"
+
+until:
+  date: "jusqu’au {date}"
+  days: "jours de jeu restants : {days}"
+
+# /season
+season:
+  header: "Saison : {season}"
+  until: " — {until}"
+  preview: " (aperçu)"
+  bullet: "• {effect}"
+
+# What each season changes, in /season. A line is only shown when its feature is on.
+effects:
+  winter:
+    biomes: "Biomes enneigés : neige au lieu de pluie, rivières et étangs gèlent (sauf près des cultures)"
+    crops: "Les cultures à ciel ouvert poussent deux fois moins vite ; sous serre, comme d’habitude"
+    animals: "Les animaux se reproduisent moins ; jours courts, nuits longues"
+    melt-date: "Le {date}, la neige et la glace naturelles fondent ; ce que tu as posé reste"
+    melt: "Au printemps, la neige et la glace naturelles fondent ; ce que tu as posé reste"
+  spring:
+    crops: "Les cultures poussent un quart plus vite"
+    animals: "Les bébés animaux grandissent deux fois plus vite"
+    particles: "Des pétales tombent sous les cerisiers"
+  summer:
+    crops: "Les cultures poussent un quart plus vite"
+    weather: "Longues journées claires, pluies courtes, orages fréquents"
+    particles: "La nuit, des lucioles au-dessus de l’herbe et des fleurs"
+  autumn:
+    fish: "Les poissons mordent un quart plus vite"
+    weather: "Longues pluies ; des feuilles rousses tombent sous les arbres"
+
+# The title and chat line once per season.
+announce:
+  winter:
+    subtitle: "Nuits longues. Reste près de la lumière."
+    chat: "Hiver — {until}."
+  spring:
+    subtitle: "Le jour et la nuit sont égaux. Tout fleurit."
+    chat: "Printemps — {until}."
+  summer:
+    subtitle: "Jours longs, nuits courtes."
+    chat: "Été — {until}."
+  autumn:
+    subtitle: "Le jour et la nuit sont égaux. Les feuilles tombent."
+    chat: "Automne — {until}."
+  hint: "Ce que change la saison : /season"
+
+# /solstice (admins)
+admin:
+  no-permission: "Tu n’as pas la permission."
+  usage: "/solstice status | preview <saison|off> | set <saison> | probe <x> <y> <z> <saison> [night] | chunk <x> <z> | reload"
+  status: "Saison du calendrier : {season}{preview}, ticks : {ticks}"
+  status-preview: ", aperçu : {season}"
+  status-details: "Solstice {version}, mode {mode}, Minecraft {minecraft}. Fonctions : {features}"
+  preview-set: "aperçu : {season}"
+  preview-off: "aperçu : désactivé"
+  set: "Saison changée : {season}"
+  set-real-date: "set ne marche qu’en mode game-days. Pour tester une saison : /solstice preview <saison>"
+  probe: "x z → particules en {rounds} passages : {hits}"
+  feature-off: "{feature} : désactivé dans la config ou indisponible dans cette version"
+  chunk-unloaded: "chunk non chargé"
+  chunk: "winter={winter}, palette={palette}, formed={formed}, biome={biome}"
+  reload: "Solstice : config rechargée"

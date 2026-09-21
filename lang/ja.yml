@@ -1,0 +1,78 @@
+# Solstice — 日本語。
+
+# Java date pattern for "until <date>".
+date-format: "M月d日"
+
+seasons:
+  winter:
+    name: "❄ 冬"
+  spring:
+    name: "🌸 春"
+  summer:
+    name: "☀ 夏"
+  autumn:
+    name: "🍁 秋"
+
+until:
+  date: "{date}まで"
+  days: "残り{days}日（ゲーム内）"
+
+# /season
+season:
+  header: "季節：{season}"
+  until: " — {until}"
+  preview: "（プレビュー）"
+  bullet: "• {effect}"
+
+# What each season changes, in /season. A line is only shown when its feature is on.
+effects:
+  winter:
+    biomes: "雪のバイオーム：雨の代わりに雪が降り、川や池が凍る（畑のそばは凍らない）"
+    crops: "屋外の作物は育つ速さが半分になる。温室ではいつも通り"
+    animals: "動物が繁殖しにくくなる。昼は短く、夜は長い"
+    melt-date: "{date}に自然の雪と氷は溶ける。自分で置いたものは残る"
+    melt: "春になると自然の雪と氷は溶ける。自分で置いたものは残る"
+  spring:
+    crops: "作物が4分の1速く育つ"
+    animals: "動物の子どもが2倍の速さで育つ"
+    particles: "桜の木の下に花びらが舞う"
+  summer:
+    crops: "作物が4分の1速く育つ"
+    weather: "晴れた長い昼、短い雨、多い雷雨"
+    particles: "夜、草や花の上をホタルが飛ぶ"
+  autumn:
+    fish: "魚が4分の1早く食いつく"
+    weather: "長雨が続き、木の下に紅葉が落ちる"
+
+# The title and chat line once per season.
+announce:
+  winter:
+    subtitle: "夜が長い。明かりのそばにいよう。"
+    chat: "冬 — {until}。"
+  spring:
+    subtitle: "昼と夜が同じ長さ。花が咲く。"
+    chat: "春 — {until}。"
+  summer:
+    subtitle: "昼は長く、夜は短い。"
+    chat: "夏 — {until}。"
+  autumn:
+    subtitle: "昼と夜が同じ長さ。葉が落ちる。"
+    chat: "秋 — {until}。"
+  hint: "季節で変わること：/season"
+
+# /solstice (admins)
+admin:
+  no-permission: "権限がありません。"
+  usage: "/solstice status | preview <季節|off> | set <季節> | probe <x> <y> <z> <季節> [night] | chunk <x> <z> | reload"
+  status: "カレンダーの季節：{season}{preview}、ティック：{ticks}"
+  status-preview: "、プレビュー：{season}"
+  status-details: "Solstice {version}、モード {mode}、Minecraft {minecraft}。機能：{features}"
+  preview-set: "プレビュー：{season}"
+  preview-off: "プレビュー：オフ"
+  set: "季節を変更：{season}"
+  set-real-date: "set は game-days モードでのみ使える。季節を試すには /solstice preview <季節>"
+  probe: "x z → {rounds}回でのパーティクル：{hits}"
+  feature-off: "{feature}：設定でオフ、またはこのバージョンでは使えない"
+  chunk-unloaded: "チャンクが読み込まれていない"
+  chunk: "winter={winter}, palette={palette}, formed={formed}, バイオーム={biome}"
+  reload: "Solstice：設定を再読み込みした"
