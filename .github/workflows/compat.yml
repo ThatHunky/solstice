@@ -1,0 +1,67 @@
+name: compat
+
+# Boots real Paper servers of every supported version with the plugin and checks it enables cleanly.
+# Versions from 26.1 on boot twice: the first start writes the sky-colour datapack, the second loads
+# it (clocks and timelines are registries) and checks the server accepted it.
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  jar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: |
+            25
+            21
+      - run: ./gradlew shadowJar --stacktrace
+      - uses: actions/upload-artifact@v4
+        with:
+          name: solstice-jar
+          path: build/libs/Solstice-1.0.0.jar
+
+  boot:
+    needs: jar
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { mc: "1.21.4", java: "21" }
+          - { mc: "1.21.5", java: "21" }
+          - { mc: "1.21.6", java: "21" }
+          - { mc: "1.21.7", java: "21" }
+          - { mc: "1.21.8", java: "21" }
+          - { mc: "1.21.9", java: "21" }
+          - { mc: "1.21.10", java: "21" }
+          - { mc: "1.21.11", java: "21" }
+          - { mc: "26.1.1", java: "25" }
+          - { mc: "26.1.2", java: "25" }
+          - { mc: "26.2", java: "25" }
+          - { mc: "26.3", java: "25" }
+    name: paper ${{ matrix.mc }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: solstice-jar
+          path: dist
+      - name: Boot Paper ${{ matrix.mc }} with Solstice
+        run: ci/boot-test.sh "${{ matrix.mc }}" dist/Solstice-1.0.0.jar
+      - name: Keep the logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-${{ matrix.mc }}
+          path: ci-run/*.log
