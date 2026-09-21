@@ -19,7 +19,7 @@ jobs:
             21
 
       - name: Build, run TestMain, compile against every supported paper-api line
-        run: ./gradlew build --stacktrace
+        run: ./gradlew build --stacktrace -Porg.gradle.java.installations.fromEnv=JAVA_HOME_25_X64
 
       - uses: actions/upload-artifact@v4
         with:

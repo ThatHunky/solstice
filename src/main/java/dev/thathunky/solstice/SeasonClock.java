@@ -67,13 +67,21 @@ final class SeasonClock implements Runnable {
         // A game-days season is a few hours long, so the clock moves in finer steps there.
         this.clockEveryMs = counter != null ? 60_000 : 600_000;
         this.announceWorlds = Set.copyOf(settings.announceWorlds());
-        Key soundKey = Key.key(settings.sound().contains(":") ? settings.sound() : "minecraft:" + settings.sound());
-        this.sound = Sound.sound(soundKey, Sound.Source.MASTER, 0.8f, 1.0f);
+        this.sound = Sound.sound(soundKey(settings.sound(), plugin), Sound.Source.MASTER, 0.8f, 1.0f);
         this.subtitleColor = TextColor.fromHexString(settings.subtitleColor());
         Path root = plugin.getServer().getWorldContainer().toPath();
         this.tabFile = settings.tab() ? root.resolve(settings.tabFile()) : null;
         this.jsonFile = settings.json() ? root.resolve(settings.jsonFile()) : null;
         this.publishedFile = plugin.getDataFolder().toPath().resolve("published-season.txt");
+    }
+
+    private static Key soundKey(String name, JavaPlugin plugin) {
+        try {
+            return Key.key(name.contains(":") ? name : "minecraft:" + name);
+        } catch (RuntimeException e) {
+            plugin.getLogger().warning("announce.sound \"" + name + "\" is not a sound id — using block.amethyst_block.chime");
+            return Key.key("minecraft:block.amethyst_block.chime");
+        }
     }
 
     void forceClock() {
